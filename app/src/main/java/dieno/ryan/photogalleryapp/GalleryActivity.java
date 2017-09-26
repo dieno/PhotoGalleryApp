@@ -15,6 +15,8 @@ public class GalleryActivity extends AppCompatActivity {
         GridView gridview = (GridView) findViewById(R.id.gallery);
         gridview.setAdapter(new ImageAdapter(this));
         //test
+        //test push
+        //abc123
     }
 
     public void openFilter(View view) {
