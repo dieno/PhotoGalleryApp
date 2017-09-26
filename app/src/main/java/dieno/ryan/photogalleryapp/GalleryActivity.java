@@ -14,6 +14,7 @@ public class GalleryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_gallery);
         GridView gridview = (GridView) findViewById(R.id.gallery);
         gridview.setAdapter(new ImageAdapter(this));
+        //test
     }
 
     public void openFilter(View view) {
