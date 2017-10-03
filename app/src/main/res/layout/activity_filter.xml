@@ -34,13 +34,14 @@
             android:text="Start Date" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/filter_start_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="March 15, 2017" />
+            android:text=""
+            android:focusable="false" />
 
         <TextView
             android:id="@+id/textView5"
@@ -50,13 +51,15 @@
             android:text="End Date" />
 
         <EditText
-            android:id="@+id/editText4"
+            android:id="@+id/filter_end_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="August 17, 2017" />
+            android:text=""
+            android:focusable="false"
+            />
 
         <CheckBox
             android:id="@+id/checkBox"

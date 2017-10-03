@@ -16,9 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FilterActivity"></activity>
-        <uses-feature android:name="android.hardware.camera"
+        <activity android:name=".FilterActivity" />
+
+        <uses-feature
+            android:name="android.hardware.camera"
             android:required="true" />
+
+        <activity android:name=".ImageActivity"></activity>
     </application>
 
 </manifest>
