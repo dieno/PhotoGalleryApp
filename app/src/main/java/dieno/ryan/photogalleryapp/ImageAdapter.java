@@ -2,12 +2,15 @@ package dieno.ryan.photogalleryapp;
 
 import android.content.Context;
 
+import android.graphics.Bitmap;
 import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+
+import java.util.ArrayList;
 
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
@@ -43,20 +46,29 @@ public class ImageAdapter extends BaseAdapter {
         {
             imageView = (ImageView) convertView;
         }
-        imageView.setImageResource(mThumbIds[position]);
+
+        //imageView.setImageResource(mThumbIds[position]);
+
+        if(photos.isEmpty() == false) {
+            imageView.setImageBitmap(photos.get(position));
+        }
+
+
         return imageView;
     }
 
+    public ArrayList<Bitmap> photos;
+
     // Keep all Images in array
     public Integer[] mThumbIds = {
+            R.drawable.eagle, R.drawable.tiger,
+            R.drawable.cow, R.drawable.eagle,
             R.drawable.eagle, R.drawable.eagle,
+            R.drawable.tiger, R.drawable.eagle,
             R.drawable.eagle, R.drawable.eagle,
+            R.drawable.eagle, R.drawable.tiger,
             R.drawable.eagle, R.drawable.eagle,
-            R.drawable.eagle, R.drawable.eagle,
-            R.drawable.eagle, R.drawable.eagle,
-            R.drawable.eagle, R.drawable.eagle,
-            R.drawable.eagle, R.drawable.eagle,
-            R.drawable.eagle, R.drawable.eagle,
+            R.drawable.tiger, R.drawable.eagle,
             R.drawable.eagle, R.drawable.eagle,
             R.drawable.eagle, R.drawable.eagle,
             R.drawable.eagle, R.drawable.eagle
