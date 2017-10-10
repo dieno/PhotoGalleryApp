@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,25 +14,44 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+
+import dieno.ryan.photogalleryapp.SearchFilters.SearchFilter;
 
 public class GalleryActivity extends AppCompatActivity {
 
-    DatabaseHelper dbHelper;
+    DatabaseController dbController;
 
     ImageAdapter imgAdapter;
+
+    SearchFilter sFilter;
+
+    public ArrayList<String> currentIdList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
 
-        dbHelper = new DatabaseHelper(this);
-        AddDummyImagesToDB();
+       // AddDummyImagesToDB();
 
         GridView gridview = (GridView) findViewById(R.id.gallery);
 
+        dbController = new DatabaseController(this);
+        //AddDummyImagesToDB();
+        currentIdList = new ArrayList<String>();
         imgAdapter = new ImageAdapter(this);
-        imgAdapter.photos = dbHelper.getAllPhotos();
+        sFilter = new SearchFilter(this);
+
+        currentIdList = getPhotoIDs();
+
+        //imgAdapter.photos = dbController.getAllPhotos();
+
+        imgAdapter.photos = dbController.getPhotos(currentIdList);
+
+
+        //imgAdapter.photos = sFilter.SearchByDate("01/05/17");
+
 
         gridview.setAdapter(imgAdapter);
 
@@ -48,6 +68,23 @@ public class GalleryActivity extends AppCompatActivity {
 
     }
 
+    public ArrayList<String> getPhotoIDs() {
+        ArrayList<String> idList = new ArrayList<String>();
+
+        if(getIntent().hasExtra("START_DATE") && getIntent().hasExtra("END_DATE")) {
+            String startDate = getIntent().getStringExtra("START_DATE_STRING");
+            String endDate = getIntent().getStringExtra("END_DATE_STRING");
+            idList = sFilter.SearchByDate(startDate,endDate);
+        }
+        else
+        {
+            idList = dbController.getAllPhotos();
+        }
+
+
+        return idList;
+    }
+
 
     public void AddDummyImagesToDB() {
 
@@ -60,7 +97,7 @@ public class GalleryActivity extends AppCompatActivity {
         String date = "01/05/17";
 
         //add to db
-        dbHelper.addEntry(id, date, DbBitmapUtility.getBytes(image));
+        dbController.addEntry(id, date, image);
 
 
         // get image from drawable
@@ -71,7 +108,7 @@ public class GalleryActivity extends AppCompatActivity {
         date = "03/10/17";
 
         //add to db
-        dbHelper.addEntry(id, date, DbBitmapUtility.getBytes(image));
+        dbController.addEntry(id, date, image);
 
         // get image from drawable
         image = BitmapFactory.decodeResource(getResources(), R.drawable.tiger);
@@ -81,7 +118,7 @@ public class GalleryActivity extends AppCompatActivity {
         date = "06/22/17";
 
         //add to db
-        dbHelper.addEntry(id, date, DbBitmapUtility.getBytes(image));
+        dbController.addEntry(id, date, image);
 
     }
 

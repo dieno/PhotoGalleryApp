@@ -3,6 +3,7 @@ package dieno.ryan.photogalleryapp;
 import android.content.Context;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -18,10 +19,11 @@ public class ImageAdapter extends BaseAdapter {
     // Constructor
     public ImageAdapter(Context c) {
         mContext = c;
+        photos = new ArrayList<Bitmap>();
     }
 
     public int getCount() {
-        return mThumbIds.length;
+        return photos.size();
     }
 
     public Object getItem(int position) {
@@ -49,10 +51,9 @@ public class ImageAdapter extends BaseAdapter {
 
         //imageView.setImageResource(mThumbIds[position]);
 
-        if(photos.isEmpty() == false) {
+        if(photos.isEmpty() == false ) {
             imageView.setImageBitmap(photos.get(position));
         }
-
 
         return imageView;
     }

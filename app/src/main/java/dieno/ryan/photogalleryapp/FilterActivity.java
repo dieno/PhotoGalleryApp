@@ -7,6 +7,7 @@ import android.icu.util.Calendar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Gallery;
@@ -86,6 +87,20 @@ public class FilterActivity extends AppCompatActivity {
 
     public void openGallery(View view) {
         Intent intent = new Intent(this, GalleryActivity.class);
+        CheckBox cb = (CheckBox) findViewById(R.id.filter_date_checkbox);
+
+        if(cb.isChecked()) {
+            EditText startDateEdit = (EditText) findViewById(R.id.filter_start_date);
+            String startDate = startDateEdit.getText().toString();
+            intent.putExtra("START_DATE", cb.isChecked());
+            intent.putExtra("START_DATE_STRING", startDate);
+
+            EditText endDateEdit = (EditText) findViewById(R.id.filter_end_date);
+            String endDate = endDateEdit.getText().toString();
+            intent.putExtra("END_DATE",cb.isChecked());
+            intent.putExtra("END_DATE_STRING",endDate);
+        }
+
         startActivity(intent);
     }
 
@@ -96,14 +111,14 @@ public class FilterActivity extends AppCompatActivity {
 
     private void updateLabelStartDate() {
         String myFormat = "MM/dd/yy"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.CANADA);
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
 
         startDate.setText(sdf.format(myCalendarStartDate.getTime()));
     }
 
     private void updateLabelEndDate() {
         String myFormat = "MM/dd/yy"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.CANADA);
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
 
         endDate.setText(sdf.format(myCalendarEndDate.getTime()));
     }
