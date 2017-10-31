@@ -43,11 +43,35 @@ public class ExampleInstrumentedTest {
     public void SearchByDateTest() throws Exception {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
-        String expectedID = "0";
+        String expectedID = "1";
         ArrayList<String> expectedIDList = new ArrayList<String>();
         expectedIDList.add(expectedID);
         SearchFilter sFilter = new SearchFilter(appContext);
         ArrayList<String> ids = sFilter.SearchByDate("01/01/17", "02/01/17");
+        assertEquals(ids, expectedIDList);
+    }
+
+    @Test
+    public void SearchByLocationTest() throws Exception {
+        // Context of the app under test.
+        Context appContext = InstrumentationRegistry.getTargetContext();
+        String expectedID = "2";
+        ArrayList<String> expectedIDList = new ArrayList<String>();
+        expectedIDList.add(expectedID);
+        SearchFilter sFilter = new SearchFilter(appContext);
+        ArrayList<String> ids = sFilter.SearchByLocation("Seattle", "USA");
+        assertEquals(ids, expectedIDList);
+    }
+
+    @Test
+    public void SearchByKeywordTest() throws Exception {
+        // Context of the app under test.
+        Context appContext = InstrumentationRegistry.getTargetContext();
+        String expectedID = "3";
+        ArrayList<String> expectedIDList = new ArrayList<String>();
+        expectedIDList.add(expectedID);
+        SearchFilter sFilter = new SearchFilter(appContext);
+        ArrayList<String> ids = sFilter.SearchByKeyword("tiger");
         assertEquals(ids, expectedIDList);
     }
 }

@@ -27,6 +27,7 @@ import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -48,11 +49,35 @@ public class SearchFilterEspressoTest {
     public void SearchByDateTest() throws Exception {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
-        String expectedID = "0";
+        String expectedID = "1";
         ArrayList<String> expectedIDList = new ArrayList<String>();
         expectedIDList.add(expectedID);
         SearchFilter sFilter = new SearchFilter(appContext);
         ArrayList<String> ids = sFilter.SearchByDate("01/01/17", "02/01/17");
+        assertEquals(ids, expectedIDList);
+    }
+
+    @Test
+    public void SearchByLocationTest() throws Exception {
+        // Context of the app under test.
+        Context appContext = InstrumentationRegistry.getTargetContext();
+        String expectedID = "2";
+        ArrayList<String> expectedIDList = new ArrayList<String>();
+        expectedIDList.add(expectedID);
+        SearchFilter sFilter = new SearchFilter(appContext);
+        ArrayList<String> ids = sFilter.SearchByLocation("Seattle", "USA");
+        assertEquals(ids, expectedIDList);
+    }
+
+    @Test
+    public void SearchByKeywordTest() throws Exception {
+        // Context of the app under test.
+        Context appContext = InstrumentationRegistry.getTargetContext();
+        String expectedID = "3";
+        ArrayList<String> expectedIDList = new ArrayList<String>();
+        expectedIDList.add(expectedID);
+        SearchFilter sFilter = new SearchFilter(appContext);
+        ArrayList<String> ids = sFilter.SearchByKeyword("tiger");
         assertEquals(ids, expectedIDList);
     }
 
@@ -71,7 +96,50 @@ public class SearchFilterEspressoTest {
         onView(withId(R.id.button_filter_gallery)).perform(click());
 
         // Expected test data
-        String expectedID = "0";
+        String expectedID = "1";
+        ArrayList<String> expectedIDList = new ArrayList<String>();
+        expectedIDList.add(expectedID);
+
+        // Get current gallery data
+        GalleryActivity mActivity = (GalleryActivity) getActivityInstance();
+        ArrayList<String> ids = mActivity.currentIdList;
+
+        assertEquals(expectedIDList, ids);
+    }
+
+    @Test
+    public void ensureLocationFilterWroks() {
+
+        // Go to filter activity and set dates
+        onView(withId(R.id.button_gallery_filter)).perform(click());
+        onView(withId(R.id.filter_city)).perform(replaceText("Seattle"));
+        onView(withId(R.id.filter_country)).perform(replaceText("USA"));
+        onView(withId(R.id.filter_location_checkbox)).perform(click());
+        onView(withId(R.id.button_filter_gallery)).perform(click());
+
+        // Expected test data
+        String expectedID = "2";
+        ArrayList<String> expectedIDList = new ArrayList<String>();
+        expectedIDList.add(expectedID);
+
+        // Get current gallery data
+        GalleryActivity mActivity = (GalleryActivity) getActivityInstance();
+        ArrayList<String> ids = mActivity.currentIdList;
+
+        assertEquals(expectedIDList, ids);
+    }
+
+    @Test
+    public void ensureKeywordFilterWroks() {
+
+        // Go to filter activity and set dates
+        onView(withId(R.id.button_gallery_filter)).perform(click());
+        onView(withId(R.id.filter_keyword)).perform(replaceText("tiger"));
+        onView(withId(R.id.filter_keyword_checkbox)).perform(click());
+        onView(withId(R.id.button_filter_gallery)).perform(click());
+
+        // Expected test data
+        String expectedID = "3";
         ArrayList<String> expectedIDList = new ArrayList<String>();
         expectedIDList.add(expectedID);
 

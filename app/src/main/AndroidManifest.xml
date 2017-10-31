@@ -22,7 +22,8 @@
             android:name="android.hardware.camera"
             android:required="true" />
 
-        <activity android:name=".ImageActivity"></activity>
+        <activity android:name=".ImageActivity" />
+        <activity android:name=".ImageEditActivity"></activity>
     </application>
 
 </manifest>

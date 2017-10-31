@@ -62,7 +62,7 @@
             />
 
         <CheckBox
-            android:id="@+id/checkBox"
+            android:id="@+id/filter_location_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -76,7 +76,7 @@
             android:text="City" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/filter_city"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -92,7 +92,7 @@
             android:text="Country" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/filter_country"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -101,7 +101,7 @@
             android:text="Canada" />
 
         <CheckBox
-            android:id="@+id/checkBox3"
+            android:id="@+id/filter_keyword_checkbox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -112,16 +112,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Keywords (Separate with spaces)" />
+            android:text="Keyword" />
 
         <EditText
-            android:id="@+id/editText5"
+            android:id="@+id/filter_keyword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="blue sunny cat" />
+            android:text="tiger" />
 
     </LinearLayout>
 

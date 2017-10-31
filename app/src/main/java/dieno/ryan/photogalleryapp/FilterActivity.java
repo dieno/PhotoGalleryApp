@@ -101,6 +101,32 @@ public class FilterActivity extends AppCompatActivity {
             intent.putExtra("END_DATE_STRING",endDate);
         }
 
+        cb = (CheckBox) findViewById(R.id.filter_location_checkbox);
+
+
+        if(cb.isChecked()) {
+            EditText cityEditText = (EditText) findViewById(R.id.filter_city);
+            String city = cityEditText.getText().toString();
+            intent.putExtra("LOCATION_CITY", cb.isChecked());
+            intent.putExtra("CITY_STRING", city);
+
+            EditText countryEditText = (EditText) findViewById(R.id.filter_country);
+            String country = countryEditText.getText().toString();
+            intent.putExtra("LOCATION_COUNTRY", cb.isChecked());
+            intent.putExtra("COUNTRY_STRING", country);
+        }
+
+        cb = (CheckBox) findViewById(R.id.filter_keyword_checkbox);
+
+
+        if(cb.isChecked()) {
+            EditText keywordEditText = (EditText) findViewById(R.id.filter_keyword);
+            String keyword = keywordEditText.getText().toString();
+            intent.putExtra("KEYWORD", cb.isChecked());
+            intent.putExtra("KEYWORD_STRING", keyword);
+
+        }
+
         startActivity(intent);
     }
 

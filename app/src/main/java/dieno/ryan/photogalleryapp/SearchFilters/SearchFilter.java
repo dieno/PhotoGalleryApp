@@ -23,6 +23,86 @@ public class SearchFilter {
 
     public SearchFilter(Context context) {mContext = context;}
 
+    public ArrayList<String> SearchByKeyword(String keyword) {
+        SQLiteDatabase db = mContext.openOrCreateDatabase("PhotoGalleryApp.db", 0, null);
+        ArrayList<String> idArray = new ArrayList<String>();
+
+        try {
+            //dbCursor = db.query("PhoneBook", null, null, null, null, null, null);
+
+            //Cursor dbCursor = db.query("Photos", null, "date='" + date + "'", null, null, null, null);
+
+            Cursor dbCursor = db.query("Photos2", null, null, null, null, null, null);
+
+            int idCol = dbCursor.getColumnIndex("id");
+            int keywordCol = dbCursor.getColumnIndex("keyword");
+
+            if (dbCursor != null) {
+                dbCursor.moveToFirst();
+                if (dbCursor.getCount() != 0) {
+                    int i = 0;
+                    do {
+                        i++;
+
+                        String id = dbCursor.getString(idCol);
+                        String keywordVal = dbCursor.getString(keywordCol);
+
+                        if(keywordVal.equals(keyword)) {
+                            idArray.add(id);
+                        }
+                    } while (dbCursor.moveToNext());
+                }
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return idArray;
+    }
+
+    public ArrayList<String> SearchByLocation(String city, String country) {
+        SQLiteDatabase db = mContext.openOrCreateDatabase("PhotoGalleryApp.db", 0, null);
+        ArrayList<String> idArray = new ArrayList<String>();
+
+        try {
+            //dbCursor = db.query("PhoneBook", null, null, null, null, null, null);
+
+            //Cursor dbCursor = db.query("Photos", null, "date='" + date + "'", null, null, null, null);
+
+            Cursor dbCursor = db.query("Photos2", null, null, null, null, null, null);
+
+            int idCol = dbCursor.getColumnIndex("id");
+            int cityCol = dbCursor.getColumnIndex("city");
+            int countryCol = dbCursor.getColumnIndex("country");
+
+            if (dbCursor != null) {
+                dbCursor.moveToFirst();
+                if (dbCursor.getCount() != 0) {
+                    int i = 0;
+                    do {
+                        i++;
+
+                        String id = dbCursor.getString(idCol);
+                        String cityVal = dbCursor.getString(cityCol);
+                        String countryVal = dbCursor.getString(countryCol);
+
+                        if(cityVal.equals(city) && countryVal.equals(country)) {
+                            idArray.add(id);
+                        }
+                    } while (dbCursor.moveToNext());
+                }
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return idArray;
+    }
+
     public ArrayList<String> SearchByDate(String startDate, String endDate) {
         SQLiteDatabase db = mContext.openOrCreateDatabase("PhotoGalleryApp.db", 0, null);
         ArrayList<String> idArray = new ArrayList<String>();
@@ -43,7 +123,7 @@ public class SearchFilter {
 
            //Cursor dbCursor = db.query("Photos", null, "date='" + date + "'", null, null, null, null);
 
-            Cursor dbCursor = db.query("Photos", null, null, null, null, null, null);
+            Cursor dbCursor = db.query("Photos2", null, null, null, null, null, null);
 
             int idCol = dbCursor.getColumnIndex("id");
             int dateCol = dbCursor.getColumnIndex("date");
